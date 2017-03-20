@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_welcome"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.atguigu.biliapk.WelcomeActivity">
+    tools:context="com.atguigu.biliapk.activity.MainActivity">
 
-    <ImageView
-        android:id="@+id/iv_welcome"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/ic_logn"/>
+        android:gravity="center"
+        android:text="主页面"
+        android:textColor="#ff0000"/>
 </LinearLayout>

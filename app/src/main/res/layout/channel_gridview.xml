@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tv_anchor"
+        android:gravity="center_horizontal"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/live_home_follow_anchor"
+        android:text="关注"
+        android:layout_margin="10dp"/>
+    <TextView
+        android:id="@+id/tv_center"
+        android:gravity="center_horizontal"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/live_home_live_center"
+        android:text="中心"
+        android:layout_margin="10dp"/>
+    <TextView
+        android:id="@+id/tv_clip"
+        android:gravity="center_horizontal"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/live_home_clip_video"
+        android:text="小视频"
+        android:layout_margin="10dp"/>
+    <TextView
+        android:id="@+id/tv_search"
+        android:gravity="center_horizontal"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/live_home_search_room"
+        android:text="搜索"
+        android:layout_margin="10dp"/>
+    <TextView
+        android:id="@+id/tv_category"
+        android:gravity="center_horizontal"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/live_home_all_category"
+        android:text="分类"
+        android:layout_margin="10dp"/>
+
+</LinearLayout>

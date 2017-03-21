@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.atguigu.biliapk.R;
@@ -31,6 +32,10 @@ public class LiveAdapter extends RecyclerView.Adapter {
      * 横幅广告
      */
     public static final int BANNER = 0;
+    /**
+     * 频道
+     */
+    public static final int CHANNEL = 1;
     private final Context mContext;
     private final LiveBean.DataBean result;
     private final LayoutInflater inflater;
@@ -53,6 +58,8 @@ public class LiveAdapter extends RecyclerView.Adapter {
     public int getItemViewType(int position) {
         if (position == BANNER) {
             currentType = BANNER;
+        } else if (position == CHANNEL) {
+            currentType = CHANNEL;
         }
         return currentType;
     }
@@ -60,13 +67,15 @@ public class LiveAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         //所有的类型写完后改成6
-        return 1;
+        return 2;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == BANNER) {
             return new BannerViewHolder(mContext, inflater.inflate(R.layout.banner_viewpager, null));
+        } else if (viewType == CHANNEL) {
+            return new ChannelViewHolder(mContext, inflater.inflate(R.layout.channel_gridview, null));
         }
         return null;
     }
@@ -77,6 +86,9 @@ public class LiveAdapter extends RecyclerView.Adapter {
             BannerViewHolder bannerViewHolder = (BannerViewHolder) holder;
             //绑定数据
             bannerViewHolder.setData(result.getBanner());
+        } else if (getItemViewType(position) == CHANNEL) {
+            ChannelViewHolder channelViewHolder = (ChannelViewHolder) holder;
+            channelViewHolder.setData();
         }
 
     }
@@ -84,9 +96,10 @@ public class LiveAdapter extends RecyclerView.Adapter {
     class BannerViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.banner)
         Banner banner1;
+
         public BannerViewHolder(Context mContext, View inflate) {
             super(inflate);
-            ButterKnife.bind(this,inflate);
+            ButterKnife.bind(this, inflate);
         }
 
         public void setData(List<LiveBean.DataBean.BannerBean> banner) {
@@ -108,6 +121,57 @@ public class LiveAdapter extends RecyclerView.Adapter {
                 @Override
                 public void OnBannerClick(int position) {
                     Toast.makeText(mContext, "position==" + position, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+    class ChannelViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.tv_anchor)
+        TextView tvAnchor;
+        @BindView(R.id.tv_center)
+        TextView tvCenter;
+        @BindView(R.id.tv_clip)
+        TextView tvClip;
+        @BindView(R.id.tv_search)
+        TextView tvSearch;
+        @BindView(R.id.tv_category)
+        TextView tvCategory;
+
+        public ChannelViewHolder(Context mContext, View inflate) {
+            super(inflate);
+            ButterKnife.bind(this,inflate);
+        }
+
+        public void setData() {
+            tvAnchor.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext, "关注", Toast.LENGTH_SHORT).show();
+                }
+            });
+            tvCenter.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext, "中心", Toast.LENGTH_SHORT).show();
+                }
+            });
+            tvClip.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext, "小视频", Toast.LENGTH_SHORT).show();
+                }
+            });
+            tvSearch.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext, "搜索", Toast.LENGTH_SHORT).show();
+                }
+            });
+            tvCategory.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext, "分类", Toast.LENGTH_SHORT).show();
                 }
             });
         }

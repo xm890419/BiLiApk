@@ -5,6 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +39,14 @@ public class LiveAdapter extends RecyclerView.Adapter {
      * 频道
      */
     public static final int CHANNEL = 1;
+    /**
+     * 绘画
+     */
+    public static final int PAINTING = 2;
+    /**
+     * 生活娱乐
+     */
+    public static final int LIFE = 3;
     private final Context mContext;
     private final LiveBean.DataBean result;
     private final LayoutInflater inflater;
@@ -60,14 +71,18 @@ public class LiveAdapter extends RecyclerView.Adapter {
             currentType = BANNER;
         } else if (position == CHANNEL) {
             currentType = CHANNEL;
+        } else if (position == PAINTING) {
+            currentType = PAINTING;
+        } else if (position == LIFE) {
+            currentType = LIFE;
         }
         return currentType;
     }
 
     @Override
     public int getItemCount() {
-        //所有的类型写完后改成6
-        return 2;
+        //所有的类型写完后改成4
+        return 4;
     }
 
     @Override
@@ -76,6 +91,10 @@ public class LiveAdapter extends RecyclerView.Adapter {
             return new BannerViewHolder(mContext, inflater.inflate(R.layout.banner_viewpager, null));
         } else if (viewType == CHANNEL) {
             return new ChannelViewHolder(mContext, inflater.inflate(R.layout.channel_gridview, null));
+        } else if (viewType == PAINTING) {
+            return new PaintingViewHolder(mContext, inflater.inflate(R.layout.painting_gridview, null));
+        } else if (viewType == LIFE) {
+            return new LifeViewHolder(mContext, inflater.inflate(R.layout.life_gridview, null));
         }
         return null;
     }
@@ -89,6 +108,12 @@ public class LiveAdapter extends RecyclerView.Adapter {
         } else if (getItemViewType(position) == CHANNEL) {
             ChannelViewHolder channelViewHolder = (ChannelViewHolder) holder;
             channelViewHolder.setData();
+        } else if (getItemViewType(position) == PAINTING) {
+            PaintingViewHolder paintingViewHolder = (PaintingViewHolder) holder;
+            paintingViewHolder.setData(result.getPartitions());
+        } else if (getItemViewType(position) == LIFE) {
+            LifeViewHolder lifeViewHolder = (LifeViewHolder) holder;
+            lifeViewHolder.setData(result.getPartitions());
         }
 
     }
@@ -140,7 +165,7 @@ public class LiveAdapter extends RecyclerView.Adapter {
 
         public ChannelViewHolder(Context mContext, View inflate) {
             super(inflate);
-            ButterKnife.bind(this,inflate);
+            ButterKnife.bind(this, inflate);
         }
 
         public void setData() {
@@ -174,6 +199,101 @@ public class LiveAdapter extends RecyclerView.Adapter {
                     Toast.makeText(mContext, "分类", Toast.LENGTH_SHORT).show();
                 }
             });
+        }
+    }
+
+    class PaintingViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.tv_paint)
+        TextView tvPaint;
+        @BindView(R.id.gv_paint)
+        GridView gvPaint;
+        @BindView(R.id.btn_m)
+        Button btnM;
+        @BindView(R.id.tv_refresh)
+        TextView tvRefresh;
+
+        public PaintingViewHolder(Context mContext, View inflate) {
+            super(inflate);
+            ButterKnife.bind(this, inflate);
+        }
+
+        public void setData(List<LiveBean.DataBean.PartitionsBean> partitions) {
+            tvPaint.setText("当前" + partitions.get(0).getPartition().getCount() + "个直播");
+            tvRefresh.setText(partitions.get(0).getLives().get(0).getArea_id() + "条新动态，点击刷新！");
+            PaintAdapter paintAdapter = new PaintAdapter(mContext, partitions);
+            gvPaint.setAdapter(paintAdapter);
+            gvPaint.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Toast.makeText(mContext, "position==" + position, Toast.LENGTH_SHORT).show();
+                }
+            });
+            tvRefresh.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext, "点击刷新", Toast.LENGTH_SHORT).show();
+                }
+            });
+            tvPaint.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext, "点击进入专区", Toast.LENGTH_SHORT).show();
+                }
+            });
+            btnM.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext, "点击进入专区", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+    class LifeViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.tv_paint)
+        TextView tvPaint;
+        @BindView(R.id.gv_paint)
+        GridView gvPaint;
+        @BindView(R.id.btn_m)
+        Button btnM;
+        @BindView(R.id.tv_refresh)
+        TextView tvRefresh;
+
+        public LifeViewHolder(Context mContext, View inflate) {
+            super(inflate);
+            ButterKnife.bind(this,inflate);
+        }
+
+        public void setData(List<LiveBean.DataBean.PartitionsBean> partitions) {
+            tvPaint.setText("当前" + partitions.get(1).getPartition().getCount() + "个直播");
+            tvRefresh.setText(partitions.get(1).getLives().get(1).getArea_id() + "条新动态，点击刷新！");
+            LifeAdapter lifeAdapter = new LifeAdapter(mContext, partitions);
+            gvPaint.setAdapter(lifeAdapter);
+            gvPaint.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Toast.makeText(mContext, "position==" + position, Toast.LENGTH_SHORT).show();
+                }
+            });
+            tvRefresh.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext, "点击刷新", Toast.LENGTH_SHORT).show();
+                }
+            });
+            tvPaint.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext, "点击进入专区", Toast.LENGTH_SHORT).show();
+                }
+            });
+            btnM.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext, "点击进入专区", Toast.LENGTH_SHORT).show();
+                }
+            });
+
         }
     }
 }

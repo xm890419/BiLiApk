@@ -59,7 +59,7 @@ public class LiveFragment extends BaseFragment {
 
     private void processData(String response) {
         LiveBean liveBean = JSON.parseObject(response, LiveBean.class);
-        Log.e("TAG", "解析数据成功==" + liveBean.getData().getBanner().get(0));
+        Log.e("TAG", "解析数据成功==" + liveBean.getData().getPartitions().get(0).getLives().get(0).getCover().getSrc());
         //设置RecyclerView的适配器
         LiveAdapter adapter = new LiveAdapter(mContext,liveBean.getData());
         rlLive.setAdapter(adapter);

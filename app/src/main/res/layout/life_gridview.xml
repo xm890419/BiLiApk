@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeeeee"
+    android:layout_margin="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:gravity="center_vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/iv_life"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="生活娱乐"
+            android:textColor="#000000"/>
+        <TextView
+            android:id="@+id/tv_paint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="5dp"
+            android:drawableRight="@drawable/ic_gray_arrow_right"
+            android:text="当前100个直播"
+            android:gravity="end"/>
+    </LinearLayout>
+    <GridView
+        android:layout_margin="10dp"
+        android:verticalSpacing="10dp"
+        android:layout_marginTop="5dp"
+        android:horizontalSpacing="10dp"
+        android:id="@+id/gv_paint"
+        android:layout_width="match_parent"
+        android:layout_height="380dp"
+        android:numColumns="2"></GridView>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp">
+        <Button
+            android:id="@+id/btn_m"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:background="#ffffff"
+            android:text="查看更多"
+            android:layout_marginRight="100dp"/>
+        <TextView
+            android:id="@+id/tv_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="300条新动态，点击刷新"
+            android:drawableRight="@drawable/ic_refresh_pink"
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+
+</LinearLayout>

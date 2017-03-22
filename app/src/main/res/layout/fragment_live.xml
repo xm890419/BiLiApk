@@ -2,11 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#22000000">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rl_live"
@@ -16,11 +15,11 @@
 
         </android.support.v7.widget.RecyclerView>
 
-        <!--<Button
+       <!-- <Button
             android:id="@+id/btn_more"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="更多直播" />-->
-    </RelativeLayout>
+
 
 </LinearLayout>

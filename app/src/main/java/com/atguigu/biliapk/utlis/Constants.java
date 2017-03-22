@@ -12,4 +12,9 @@ public class Constants {
 
     public static String LIVE_BANNER_IMAGE  = "http://i0.hdslb.com/bfs/live/2807719e244e45714a3e08548b1c889815eaa1f6.png";
 
+    //推荐
+    public static String RECOMMEND_URL ="http://app.bilibili.com/x/" +
+            "feed/index?appkey=1d8b6e7d45233436&build=501000&idx=1490013261&mobi_app=" +
+            "android&network=wifi&platform=android&pull=true&style=2&ts=1490015599000&sign=" +
+            "af4edc66aef7e443c98c28de2b660aa4";
 }

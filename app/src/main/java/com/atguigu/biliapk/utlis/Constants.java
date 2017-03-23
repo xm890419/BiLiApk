@@ -17,4 +17,8 @@ public class Constants {
             "feed/index?appkey=1d8b6e7d45233436&build=501000&idx=1490013261&mobi_app=" +
             "android&network=wifi&platform=android&pull=true&style=2&ts=1490015599000&sign=" +
             "af4edc66aef7e443c98c28de2b660aa4";
+    //追番
+    public static String THEM_URL ="http://bangumi.bilibili.com/api/app_index_page_v4?build=3940&device=phone&mobi_app=iphone&platform=ios";
+    //banner
+    public static String BANNER_URL ="http://bangumi.bilibili.com/api/bangumi_recommend?access_key=f5bd4e793b82fba5aaf5b91fb549910a&actionKey=appkey&appkey=27eb53fc9058f8c3&build=3470&cursor=0&device=phone&mobi_app=iphone&pagesize=10&platform=ios&sign=56329a5709c401d4d7c0237f64f7943f&ts=1469613558";
 }

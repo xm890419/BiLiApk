@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:background="#ffffff"
+    android:gravity="center">
+
+
+
+    <ImageView
+        android:id="@+id/iv_recommend"
+        android:layout_width="180dp"
+        android:layout_height="120dp"
+        android:background="@drawable/new_img_loading_2" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="2"
+        android:padding="2dp"
+        android:text="修仙赶稿"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:layout_margin="2dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="2dp">
+
+        <TextView
+            android:id="@+id/tv_ming"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="宇宙帝王地铁"
+            android:layout_weight="1"
+            android:textSize="12sp"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

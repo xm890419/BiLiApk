@@ -1,5 +1,6 @@
 package com.atguigu.biliapk.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.atguigu.biliapk.R;
+import com.atguigu.biliapk.activity.TopicCenterActivity;
 import com.atguigu.biliapk.base.BaseFragment;
 import com.atguigu.biliapk.bean.TagBean;
 import com.atguigu.biliapk.utlis.Constants;
@@ -175,7 +177,8 @@ public class FoundFragment extends BaseFragment {
                 Toast.makeText(mContext, "兴趣圈", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.rl_topic:
-                Toast.makeText(mContext, "话题中心", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, "话题中心", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), TopicCenterActivity.class));
                 break;
             case R.id.rl_center:
                 Toast.makeText(mContext, "活动中心", Toast.LENGTH_SHORT).show();

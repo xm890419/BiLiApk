@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <com.cjj.MaterialRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:overlay="true"
+        app:isLoadMore="true"
+        app:progress_size_type="normal"
+        app:wave_color="#90ffffff"
+        app:wave_show="true"
+        app:progress_colors="@array/material_colors"
+        app:wave_height_type="normal">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:scrollbars="none" />
+
+    </com.cjj.MaterialRefreshLayout>
+    <TextView
+        android:id="@+id/tv_no_media"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="没有发现视频..." />
+
+
+</LinearLayout>

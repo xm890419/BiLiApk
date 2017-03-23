@@ -7,7 +7,6 @@ import android.view.View;
 
 import com.alibaba.fastjson.JSON;
 import com.atguigu.biliapk.R;
-import com.atguigu.biliapk.activity.MainActivity;
 import com.atguigu.biliapk.adapter.ThemAdapter;
 import com.atguigu.biliapk.base.BaseFragment;
 import com.atguigu.biliapk.bean.BannerBean;
@@ -70,17 +69,17 @@ public class ThemFragment extends BaseFragment {
                     @Override
                     public void onResponse(final String response, int id) {
                         //Log.e("TAG", "" + response);
-                        MainActivity activity = (MainActivity) mContext;
+                        /*MainActivity activity = (MainActivity) mContext;
                         activity.runOnUiThread(new Runnable() {
                             @Override
-                            public void run() {
+                            public void run() {*/
                                 processData1(response);
                                 adapter = new ThemAdapter(mContext,resultBean,result);
                                 rvThem.setAdapter(adapter);
                                 GridLayoutManager manager = new GridLayoutManager(mContext,1);
                                 rvThem.setLayoutManager(manager);
-                            }
-                        });
+                           /* }
+                        });*/
 
                     }
                 });

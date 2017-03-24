@@ -1,6 +1,7 @@
 package com.atguigu.biliapk.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.atguigu.biliapk.R;
+import com.atguigu.biliapk.activity.AuanzhuActivity;
+import com.atguigu.biliapk.activity.LiveWbActivity;
 import com.atguigu.biliapk.bean.LiveBean;
 import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
@@ -127,10 +130,9 @@ public class LiveAdapter extends RecyclerView.Adapter {
             ButterKnife.bind(this, inflate);
         }
 
-        public void setData(List<LiveBean.DataBean.BannerBean> banner) {
-            List<String> images = new ArrayList<>();
+        public void setData(final List<LiveBean.DataBean.BannerBean> banner) {
+            final List<String> images = new ArrayList<>();
             for (int i = 0; i < banner.size(); i++) {
-                images.add(banner.get(i).getImg());
                 images.add(banner.get(i).getImg());
             }
             banner1.setImages(images).setImageLoader(new ImageLoader() {
@@ -145,7 +147,19 @@ public class LiveAdapter extends RecyclerView.Adapter {
             banner1.setOnBannerListener(new OnBannerListener() {
                 @Override
                 public void OnBannerClick(int position) {
-                    Toast.makeText(mContext, "position==" + position, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(mContext, "position==" + position, Toast.LENGTH_SHORT).show();
+                    String title = banner.get(position).getTitle();
+                    String link = banner.get(position).getLink();
+
+                    /*LiveBean liveBean= new LiveBean();
+                    LiveBean.DataBean.BannerBean bannerBean = liveBean.getData().getBanner().get(position);
+                    bannerBean.setTitle(title);
+                    bannerBean.setImg(link);*/
+
+                    Intent intent = new Intent(mContext, LiveWbActivity.class);
+                    intent.putExtra("title",title);
+                    intent.putExtra("link",link);
+                    mContext.startActivity(intent);
                 }
             });
         }
@@ -172,7 +186,8 @@ public class LiveAdapter extends RecyclerView.Adapter {
             tvAnchor.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(mContext, "关注", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(mContext, "关注", Toast.LENGTH_SHORT).show();
+                    mContext.startActivity(new Intent(mContext,AuanzhuActivity.class));
                 }
             });
             tvCenter.setOnClickListener(new View.OnClickListener() {
@@ -261,7 +276,7 @@ public class LiveAdapter extends RecyclerView.Adapter {
 
         public LifeViewHolder(Context mContext, View inflate) {
             super(inflate);
-            ButterKnife.bind(this,inflate);
+            ButterKnife.bind(this, inflate);
         }
 
         public void setData(List<LiveBean.DataBean.PartitionsBean> partitions) {

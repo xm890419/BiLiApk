@@ -1,5 +1,6 @@
 package com.atguigu.biliapk.fragment;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,6 +15,8 @@ import com.atguigu.biliapk.utlis.Constants;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.Call;
@@ -25,6 +28,11 @@ import okhttp3.Call;
 public class ComprehensiveFragment extends BaseFragment {
     @BindView(R.id.gv_zong)
     RecyclerView gvZong;
+    @BindView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
+
+    private List<RecommendBean.DataBean> datas;
+    private ComprehensiveAdapter adapter;
 
     //private TextView textView;
     @Override
@@ -44,7 +52,12 @@ public class ComprehensiveFragment extends BaseFragment {
         super.initData();
         //textView.setText("综合");
         getDataFromNet();
-
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getDataFromNet();
+            }
+        });
     }
 
     private void getDataFromNet() {
@@ -58,17 +71,18 @@ public class ComprehensiveFragment extends BaseFragment {
             public void onResponse(String response, int id) {
                 Log.e("TAG", "" + response);
                 processData(response);
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
 
     private void processData(String response) {
-        RecommendBean recommendBean = JSON.parseObject(response, RecommendBean.class);
+        final RecommendBean recommendBean = JSON.parseObject(response, RecommendBean.class);
+        datas = recommendBean.getData();
         Log.e("TAG", "解析数据成功==" + recommendBean.getData().get(0).getName().toString());
-        ComprehensiveAdapter adapter = new ComprehensiveAdapter(mContext, recommendBean.getData());
+        adapter = new ComprehensiveAdapter(mContext, recommendBean.getData());
         gvZong.setAdapter(adapter);
-        GridLayoutManager manager = new GridLayoutManager(mContext,2);
+        GridLayoutManager manager = new GridLayoutManager(mContext, 2);
         gvZong.setLayoutManager(manager);
     }
-
 }

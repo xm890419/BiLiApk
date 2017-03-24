@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.atguigu.biliapk.R;
+import com.atguigu.biliapk.activity.ActivityCenterActivity;
 import com.atguigu.biliapk.activity.TopicCenterActivity;
 import com.atguigu.biliapk.base.BaseFragment;
 import com.atguigu.biliapk.bean.TagBean;
@@ -181,7 +182,8 @@ public class FoundFragment extends BaseFragment {
                 startActivity(new Intent(getActivity(), TopicCenterActivity.class));
                 break;
             case R.id.rl_center:
-                Toast.makeText(mContext, "活动中心", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(mContext, "活动中心", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), ActivityCenterActivity.class));
                 break;
             case R.id.rl_black:
                 Toast.makeText(mContext, "小黑屋", Toast.LENGTH_SHORT).show();

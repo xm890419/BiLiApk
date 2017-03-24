@@ -28,7 +28,7 @@
             android:text="更多番剧"
             android:gravity="end"/>
     </LinearLayout>
-    <GridView
+    <com.atguigu.biliapk.view.MyGridView
         android:layout_margin="10dp"
         android:verticalSpacing="10dp"
         android:layout_marginTop="5dp"
@@ -36,6 +36,6 @@
         android:id="@+id/gv_paint"
         android:layout_width="match_parent"
         android:layout_height="380dp"
-        android:numColumns="3"></GridView>
+        android:numColumns="3"></com.atguigu.biliapk.view.MyGridView>
 
 </LinearLayout>

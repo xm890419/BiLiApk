@@ -1,5 +1,6 @@
 package com.atguigu.biliapk.fragment;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -25,6 +26,8 @@ import okhttp3.Call;
 public class LiveFragment extends BaseFragment {
     @BindView(R.id.rl_live)
     RecyclerView rlLive;
+    @BindView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
     /*@BindView(R.id.btn_more)
     Button btnMore;*/
 
@@ -32,7 +35,7 @@ public class LiveFragment extends BaseFragment {
     @Override
     protected View initView() {
         View view = View.inflate(mContext, R.layout.fragment_live, null);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         return view;
     }
 
@@ -40,6 +43,12 @@ public class LiveFragment extends BaseFragment {
     public void initData() {
         super.initData();
         getDataFromNet();
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getDataFromNet();
+            }
+        });
     }
 
     private void getDataFromNet() {
@@ -53,6 +62,7 @@ public class LiveFragment extends BaseFragment {
             public void onResponse(String response, int id) {
                 //Log.e("TAG", "=="+response);
                 processData(response);
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
@@ -61,7 +71,7 @@ public class LiveFragment extends BaseFragment {
         LiveBean liveBean = JSON.parseObject(response, LiveBean.class);
         Log.e("TAG", "解析数据成功==" + liveBean.getData().getPartitions().get(0).getLives().get(0).getCover().getSrc());
         //设置RecyclerView的适配器
-        LiveAdapter adapter = new LiveAdapter(mContext,liveBean.getData());
+        LiveAdapter adapter = new LiveAdapter(mContext, liveBean.getData());
         rlLive.setAdapter(adapter);
 
         GridLayoutManager manager = new GridLayoutManager(mContext, 1);
@@ -79,5 +89,4 @@ public class LiveFragment extends BaseFragment {
         });*/
 
     }
-
 }

@@ -1,5 +1,6 @@
 package com.atguigu.biliapk.fragment;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -29,6 +30,8 @@ public class ThemFragment extends BaseFragment {
 
     @BindView(R.id.rv_them)
     RecyclerView rvThem;
+    @BindView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
     private ThemBean.ResultBean resultBean;
     private List<BannerBean.ResultBean> result;
     private ThemAdapter adapter;
@@ -45,9 +48,15 @@ public class ThemFragment extends BaseFragment {
         super.initData();
         getDataFromNet();
 
-
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getDataFromNet();
+            }
+        });
 
     }
+
     private void getDataFromNet() {
         OkHttpUtils.get().url(Constants.THEM_URL).build().execute(new StringCallback() {
             @Override
@@ -73,11 +82,12 @@ public class ThemFragment extends BaseFragment {
                         activity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {*/
-                                processData1(response);
-                                adapter = new ThemAdapter(mContext,resultBean,result);
-                                rvThem.setAdapter(adapter);
-                                GridLayoutManager manager = new GridLayoutManager(mContext,1);
-                                rvThem.setLayoutManager(manager);
+                        processData1(response);
+                        swipeRefreshLayout.setRefreshing(false);
+                        adapter = new ThemAdapter(mContext, resultBean, result);
+                        rvThem.setAdapter(adapter);
+                        GridLayoutManager manager = new GridLayoutManager(mContext, 1);
+                        rvThem.setLayoutManager(manager);
                            /* }
                         });*/
 
@@ -86,16 +96,17 @@ public class ThemFragment extends BaseFragment {
             }
         });
     }
+
     private void processData1(String response) {
         BannerBean bannerBean = JSON.parseObject(response, BannerBean.class);
         Log.e("TAG", "解析数据成功==" + bannerBean.getResult().get(0).getTitle());
         result = bannerBean.getResult();
     }
+
     private void processData(String response) {
         ThemBean themBean = JSON.parseObject(response, ThemBean.class);
         Log.e("TAG11", "解析数据成功==" + themBean.getResult().getSerializing().get(0).getTitle());
         resultBean = themBean.getResult();
-
 
 
     }

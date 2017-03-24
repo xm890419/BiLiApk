@@ -30,15 +30,15 @@
             android:text="当前100个直播"
             android:gravity="end"/>
     </LinearLayout>
-    <GridView
+    <com.atguigu.biliapk.view.MyGridView
         android:layout_margin="10dp"
         android:verticalSpacing="10dp"
         android:layout_marginTop="5dp"
         android:horizontalSpacing="10dp"
         android:id="@+id/gv_paint"
         android:layout_width="match_parent"
-        android:layout_height="380dp"
-        android:numColumns="2"></GridView>
+        android:layout_height="400dp"
+        android:numColumns="2"></com.atguigu.biliapk.view.MyGridView>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"

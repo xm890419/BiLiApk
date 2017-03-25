@@ -30,7 +30,10 @@ public class LiveFragment extends BaseFragment {
     SwipeRefreshLayout swipeRefreshLayout;
     /*@BindView(R.id.btn_more)
     Button btnMore;*/
+    public static LiveFragment newInstance() {
 
+        return new LiveFragment();
+    }
 
     @Override
     protected View initView() {

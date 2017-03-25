@@ -7,95 +7,28 @@
     android:layout_height="match_parent"
     tools:context="com.atguigu.biliapk.activity.MainActivity">
 
-    <android.support.design.widget.CoordinatorLayout
-
-        android:id="@+id/activity_toolbar"
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#fb7299">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:minHeight="50dp"
-                android:orientation="vertical"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-                <include
-                    android:id="@+id/title_main"
-                    layout="@layout/title_main"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"></include>
-
-                <android.support.design.widget.TabLayout
-                    android:id="@+id/tablayout"
-                    style="@style/MyCustomTabLayout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp" />
+        android:layout_height="match_parent" />
 
 
-            </LinearLayout>
-
-
-        </android.support.design.widget.AppBarLayout>
-
-        <android.support.v4.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <!--<android.support.v4.view.ViewPager
-                android:id="@+id/view_pager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />-->
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:scrollbars="none"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/view_pager"
-                    android:layout_width="wrap_content"
-                    android:layout_height="600dp">
-
-                </android.support.v4.view.ViewPager>
-            </LinearLayout>
-
-
-        </android.support.v4.widget.NestedScrollView>
-        <!--<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:scrollbars="none"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <android.support.v4.view.ViewPager
-                android:id="@+id/view_pager"
-                android:layout_width="wrap_content"
-                android:layout_height="600dp">
-
-            </android.support.v4.view.ViewPager>
-        </LinearLayout>-->
-
-
-    </android.support.design.widget.CoordinatorLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="320dp"
         android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="#fff"
+        android:overScrollMode="never"
+        app:headerLayout="@layout/left_layout"
+        app:menu="@menu/navigation_main" />
+    <!--<RelativeLayout
+        android:id="@+id/rl_left"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:background="#fff">
         <include layout="@layout/left_layout" />
-    </RelativeLayout>
+    </RelativeLayout>-->
 </android.support.v4.widget.DrawerLayout>
 

@@ -83,11 +83,11 @@ public class ThemFragment extends BaseFragment {
                             @Override
                             public void run() {*/
                         processData1(response);
-                        swipeRefreshLayout.setRefreshing(false);
                         adapter = new ThemAdapter(mContext, resultBean, result);
                         rvThem.setAdapter(adapter);
                         GridLayoutManager manager = new GridLayoutManager(mContext, 1);
                         rvThem.setLayoutManager(manager);
+                        swipeRefreshLayout.setRefreshing(false);
                            /* }
                         });*/
 

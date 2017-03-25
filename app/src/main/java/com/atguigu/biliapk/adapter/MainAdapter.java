@@ -13,7 +13,9 @@ import java.util.List;
  */
 
 public class MainAdapter extends FragmentPagerAdapter {
-    private List<BaseFragment> fragments;
+
+
+    private final List<BaseFragment> fragments;
     private String[] titles = new String[]{"直播", "推荐","追番", "分类","发现"};
     public MainAdapter(FragmentManager fm, List<BaseFragment> fragments) {
         super(fm);

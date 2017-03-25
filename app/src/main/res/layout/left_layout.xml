@@ -33,6 +33,7 @@
                 android:textSize="15sp" />
 
             <ImageView
+                android:id="@+id/iv_yue"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_alignParentEnd="true"
@@ -43,7 +44,7 @@
                 android:src="@drawable/ic_switch_night" />
         </RelativeLayout>
 
-        <TextView
+       <!-- <TextView
             android:id="@+id/tv_home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -164,7 +165,7 @@
             android:drawablePadding="40dp"
             android:gravity="center_vertical"
             android:text="设置与帮助" />
-
+-->
 
     </LinearLayout>
 </ScrollView>

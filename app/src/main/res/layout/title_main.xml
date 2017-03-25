@@ -17,23 +17,26 @@
         android:textSize="25sp"
         android:layout_weight="1"
         />
-    <ImageView
+    <!--<ImageView
+        android:id="@+id/iv_game"
         android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_menu_top_game_center" />
     <ImageView
+        android:id="@+id/iv_download"
         android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:src="@drawable/ic_toolbar_menu_download"/>
     <ImageView
+        android:id="@+id/iv_search"
         android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_download_search"
-        android:layout_marginRight="10dp"/>
+        android:layout_marginRight="10dp"/>-->
 
 
 </LinearLayout>

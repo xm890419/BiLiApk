@@ -6,8 +6,11 @@ import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.atguigu.biliapk.activity.LoginActivity;
 import com.atguigu.biliapk.activity.MainActivity;
 import com.atguigu.biliapk.base.BaseActivity;
+import com.atguigu.biliapk.utlis.ConstantUtil;
+import com.atguigu.biliapk.utlis.PreferenceUtil;
 
 import butterknife.BindView;
 
@@ -49,9 +52,17 @@ public class WelcomeActivity extends BaseActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                //进入主页面
-                startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+                boolean isLogin = PreferenceUtil.getBoolean(ConstantUtil.KEY, false);
+                if (isLogin) {
+                    startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+                } else {
+                    startActivity(new Intent(WelcomeActivity.this, LoginActivity.class));
+                }
+
                 finish();
+                /*//进入主页面
+                startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+                finish();*/
             }
 
             @Override

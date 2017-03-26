@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_search"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,5 +10,47 @@
     android:orientation="vertical"
     tools:context="com.atguigu.biliapk.activity.SearchActivity">
     <include layout="@layout/layout_card_search" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/search_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.flyco.tablayout.SlidingTabLayout
+                android:id="@+id/sliding_tabs"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/gray_light_30"
+                app:tl_indicator_color="@color/colorPrimary"
+                app:tl_indicator_corner_radius="1dp"
+                app:tl_indicator_height="2dp"
+                app:tl_tab_padding="15dp"
+                app:tl_tab_space_equal="false"
+                app:tl_textSelectColor="@color/colorPrimary"
+                app:tl_textUnselectColor="@color/font_normal" />
+
+            <com.atguigu.biliapk.view.NoScrollViewPager
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never" />
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/iv_search_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+
+    </FrameLayout>
 
 </LinearLayout>

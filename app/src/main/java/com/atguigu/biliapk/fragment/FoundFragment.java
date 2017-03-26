@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.atguigu.biliapk.R;
 import com.atguigu.biliapk.activity.ActivityCenterActivity;
+import com.atguigu.biliapk.activity.GameActivity;
 import com.atguigu.biliapk.activity.TopicCenterActivity;
 import com.atguigu.biliapk.base.BaseFragment;
 import com.atguigu.biliapk.bean.TagBean;
@@ -195,7 +196,8 @@ public class FoundFragment extends BaseFragment {
                 Toast.makeText(mContext, "全区排行榜", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.rl_game:
-                Toast.makeText(mContext, "游戏中心", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, "游戏中心", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), GameActivity.class));
                 break;
             case R.id.rl_shop:
                 Toast.makeText(mContext, "周边商城", Toast.LENGTH_SHORT).show();

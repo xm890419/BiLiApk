@@ -2,10 +2,9 @@
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/dl_left"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.atguigu.biliapk.activity.MainActivity">
+    android:fitsSystemWindows="true">
 
     <FrameLayout
         android:id="@+id/container"
@@ -15,10 +14,10 @@
 
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_view"
-        android:layout_width="320dp"
+        android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#fff"
+        android:background="@color/navigation_background_light"
         android:overScrollMode="never"
         app:headerLayout="@layout/left_layout"
         app:menu="@menu/navigation_main" />

@@ -12,6 +12,7 @@ import com.atguigu.biliapk.adapter.LiveAdapter;
 import com.atguigu.biliapk.base.BaseFragment;
 import com.atguigu.biliapk.bean.LiveBean;
 import com.atguigu.biliapk.utlis.Constants;
+import com.atguigu.biliapk.view.CustomEmptyView;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -28,6 +29,9 @@ public class LiveFragment extends BaseFragment {
     RecyclerView rlLive;
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.empty_layout)
+    CustomEmptyView emptyLayout;
+
     /*@BindView(R.id.btn_more)
     Button btnMore;*/
     public static LiveFragment newInstance() {

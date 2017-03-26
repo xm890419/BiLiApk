@@ -16,25 +16,48 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
+        android:name=".app.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WelcomeActivity">
+        <activity
+            android:name=".WelcomeActivity"
+            android:theme="@style/ColorTranslucentTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.TopicCenterActivity" />
-        <activity android:name=".activity.ActivityCenterActivity" />
-        <activity android:name=".activity.LiveWbActivity" />
-        <activity android:name=".activity.AuanzhuActivity" />
-        <activity android:name=".activity.SearchActivity" />
-        <activity android:name=".activity.GameActivity"></activity>
+        <activity
+            android:name=".activity.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/MainActivityColorTranslucentTheme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity android:name=".activity.TopicCenterActivity"
+            android:theme="@style/ColorTranslucentTheme"/>
+        <activity android:name=".activity.ActivityCenterActivity"
+            android:theme="@style/ColorTranslucentTheme"/>
+        <activity android:name=".activity.LiveWbActivity"
+            android:theme="@style/ColorTranslucentTheme"/>
+        <activity android:name=".activity.AuanzhuActivity"
+            android:theme="@style/ColorTranslucentTheme"/>
+        <activity android:name=".activity.SearchActivity"
+            android:theme="@style/ColorTranslucentTheme"/>
+        <activity
+            android:name=".activity.GameActivity"
+            android:theme="@style/ColorTranslucentTheme" />
+        <activity
+            android:name=".activity.DownloadActivity"
+            android:theme="@style/ColorTranslucentTheme" />
+        <activity
+            android:name=".activity.VipActivity"
+            android:theme="@style/ColorTranslucentTheme" />
+        <activity android:name=".activity.LoginActivity"
+            android:theme="@style/ColorTranslucentTheme"></activity>
     </application>
 
 </manifest>

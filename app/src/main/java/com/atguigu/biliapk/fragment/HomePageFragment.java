@@ -2,25 +2,29 @@ package com.atguigu.biliapk.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.atguigu.biliapk.R;
+import com.atguigu.biliapk.activity.DownloadActivity;
 import com.atguigu.biliapk.activity.GameActivity;
 import com.atguigu.biliapk.activity.MainActivity;
 import com.atguigu.biliapk.activity.SearchActivity;
 import com.atguigu.biliapk.adapter.MainAdapter;
 import com.atguigu.biliapk.base.BaseFragment;
+import com.atguigu.biliapk.view.CircleImageView;
+import com.atguigu.biliapk.view.NoScrollViewPager;
+import com.flyco.tablayout.SlidingTabLayout;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
@@ -35,24 +39,18 @@ import butterknife.OnClick;
  */
 
 public class HomePageFragment extends BaseFragment {
-    @BindView(R.id.tv_left)
-    TextView tvLeft;
-    @BindView(R.id.tablayout)
-    TabLayout tablayout;
-    @BindView(R.id.view_pager)
-    ViewPager viewPager;
-    @BindView(R.id.activity_toolbar)
-    CoordinatorLayout activityToolbar;
+    @BindView(R.id.toolbar_user_avatar)
+    CircleImageView toolbarUserAvatar;
+    @BindView(R.id.navigation_layout)
+    LinearLayout navigationLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.sliding_tabs)
+    SlidingTabLayout slidingTabs;
+    @BindView(R.id.view_pager)
+    NoScrollViewPager viewPager;
     @BindView(R.id.search_view)
     MaterialSearchView searchView;
-   /* @BindView(R.id.iv_game)
-    ImageView ivGame;
-    @BindView(R.id.iv_download)
-    ImageView ivDownload;
-    @BindView(R.id.iv_search)
-    ImageView ivSearch;*/
     private List<BaseFragment> fragments;
 
     public static HomePageFragment newInstance() {
@@ -71,13 +69,16 @@ public class HomePageFragment extends BaseFragment {
         super.initData();
         setHasOptionsMenu(true);
         initToolBar();
+        initSearchView();
         initFramgent();
         MainAdapter adapter = new MainAdapter(getChildFragmentManager(), fragments);
         viewPager.setAdapter(adapter);
         //关联ViewPager
-        tablayout.setupWithViewPager(viewPager);
-        tablayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        slidingTabs.setViewPager(viewPager);
+        slidingTabs.setLayoutMode(TabLayout.MODE_SCROLLABLE);
+        viewPager.setCurrentItem(1);
     }
+
     private void initSearchView() {
 
         //初始化SearchBar
@@ -119,13 +120,15 @@ public class HomePageFragment extends BaseFragment {
         fragments.add(new FoundFragment());
     }
 
-    @OnClick(R.id.tv_left)
-    public void onClick() {
+    @OnClick(R.id.navigation_layout)
+    void toggleDrawer() {
+
         Activity activity = getActivity();
         if (activity instanceof MainActivity) {
             ((MainActivity) activity).toggleDrawer();
         }
     }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
@@ -146,17 +149,19 @@ public class HomePageFragment extends BaseFragment {
             case R.id.id_action_game:
                 //游戏中心
                 //Toast.makeText(mContext, "游戏", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(mContext,GameActivity.class));
+                startActivity(new Intent(mContext, GameActivity.class));
                 break;
 
             case R.id.id_action_download:
                 //离线缓存
-                Toast.makeText(mContext, "下载", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, "下载", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(mContext, DownloadActivity.class));
                 break;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -172,5 +177,16 @@ public class HomePageFragment extends BaseFragment {
             return;
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public boolean isOpenSearchView() {
+
+        return searchView.isSearchOpen();
+    }
+
+
+    public void closeSearchView() {
+
+        searchView.closeSearch();
     }
 }

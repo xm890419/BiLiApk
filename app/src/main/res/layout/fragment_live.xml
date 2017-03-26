@@ -1,31 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipe_refresh_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#22000000"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh_layout"
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rl_live"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:descendantFocusability="blocksDescendants">
+        android:overScrollMode="never"
+        android:scrollbars="none">
 
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rl_live"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+    </android.support.v7.widget.RecyclerView>
 
-
-        </android.support.v7.widget.RecyclerView>
-
-        <!-- <Button
-             android:id="@+id/btn_more"
-             android:layout_width="match_parent"
-             android:layout_height="50dp"
-             android:text="更多直播" />-->
-    </android.support.v4.widget.SwipeRefreshLayout>
-</LinearLayout>
+    <!-- <Button
+         android:id="@+id/btn_more"
+         android:layout_width="match_parent"
+         android:layout_height="50dp"
+         android:text="更多直播" />-->
+    <com.atguigu.biliapk.view.CustomEmptyView
+        android:id="@+id/empty_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+</android.support.v4.widget.SwipeRefreshLayout>

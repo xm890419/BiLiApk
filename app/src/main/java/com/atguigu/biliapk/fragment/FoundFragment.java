@@ -20,6 +20,7 @@ import com.atguigu.biliapk.R;
 import com.atguigu.biliapk.activity.ActivityCenterActivity;
 import com.atguigu.biliapk.activity.GameActivity;
 import com.atguigu.biliapk.activity.OriginalActivity;
+import com.atguigu.biliapk.activity.ShopingActivity;
 import com.atguigu.biliapk.activity.TopicCenterActivity;
 import com.atguigu.biliapk.base.BaseFragment;
 import com.atguigu.biliapk.bean.TagBean;
@@ -217,7 +218,8 @@ public class FoundFragment extends BaseFragment {
                 startActivity(new Intent(getActivity(), GameActivity.class));
                 break;
             case R.id.rl_shop:
-                Toast.makeText(mContext, "周边商城", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, "周边商城", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(mContext,ShopingActivity.class));
                 break;
         }
     }

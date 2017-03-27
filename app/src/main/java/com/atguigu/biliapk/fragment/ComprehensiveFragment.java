@@ -1,5 +1,6 @@
 package com.atguigu.biliapk.fragment;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +9,7 @@ import android.view.View;
 
 import com.alibaba.fastjson.JSON;
 import com.atguigu.biliapk.R;
+import com.atguigu.biliapk.activity.GoodsInfoActivity;
 import com.atguigu.biliapk.adapter.ComprehensiveAdapter;
 import com.atguigu.biliapk.base.BaseFragment;
 import com.atguigu.biliapk.bean.RecommendBean;
@@ -84,5 +86,22 @@ public class ComprehensiveFragment extends BaseFragment {
         gvZong.setAdapter(adapter);
         GridLayoutManager manager = new GridLayoutManager(mContext, 2);
         gvZong.setLayoutManager(manager);
+        adapter.setOnItemClickListener(new ComprehensiveAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                //Toast.makeText(mContext, "=="+position, Toast.LENGTH_SHORT).show();
+                RecommendBean.DataBean dataBean = datas.get(position);
+                String title = dataBean.getTitle();
+                String desc = dataBean.getDesc();
+                String cover = dataBean.getCover();
+                Intent intent = new Intent(mContext, GoodsInfoActivity.class);
+                intent.putExtra("title",title);
+                intent.putExtra("desc",desc);
+                intent.putExtra("cover",cover);
+                intent.putExtra("dataBean",dataBean);
+                mContext.startActivity(intent);
+            }
+        });
+
     }
 }

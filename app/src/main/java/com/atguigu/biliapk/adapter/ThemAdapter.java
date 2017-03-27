@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -131,7 +132,7 @@ public class ThemAdapter extends RecyclerView.Adapter {
 
         }
 
-        public void setData(List<ThemBean.ResultBean.SerializingBean> serializingBeen) {
+        public void setData(final List<ThemBean.ResultBean.SerializingBean> serializingBeen) {
             tvPaint.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -140,6 +141,22 @@ public class ThemAdapter extends RecyclerView.Adapter {
             });
             PlayAdapter playAdapter = new PlayAdapter(mContext, serializingBeen);
             gvPaint.setAdapter(playAdapter);
+            gvPaint.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    /*ThemBean.ResultBean.SerializingBean serializingBean = serializingBeen.get(position);
+                    String title = serializingBean.getTitle();
+                    String favourites = serializingBean.getFavourites();
+                    String cover = serializingBean.getCover();
+                    Intent intent = new Intent(mContext, GoodsInfoActivity.class);
+                    intent.putExtra("title",title);
+                    intent.putExtra("favourites",favourites);
+                    intent.putExtra("cover",cover);
+                    intent.putExtra("serializingBean",serializingBean);
+                    mContext.startActivity(intent);*/
+                    Toast.makeText(mContext, "=="+position, Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 

@@ -2,13 +2,14 @@ package com.atguigu.biliapk.bean;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by 熊猛 on 2017/3/22.
  */
 
-public class RecommendBean {
+public class RecommendBean implements Serializable{
 
     /**
      * code : 0
@@ -44,7 +45,7 @@ public class RecommendBean {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable{
         /**
          * title : 【被神抛弃的存在】DNF-痛苦之村Leshphon【木吉他指弹】
          * cover : http://i1.hdslb.com/bfs/archive/525b2926a7128e9f74f6de3340ae789caed2edfc.jpg
@@ -72,6 +73,33 @@ public class RecommendBean {
          * is_ad_loc : true
          * client_ip : 113.45.81.126
          */
+        private boolean isChecked = true;
+        public boolean isChecked() {
+            return isChecked;
+        }
+
+        public void setChecked(boolean checked) {
+            isChecked = checked;
+        }
+        private int number = 1;
+
+        public int getNumber() {
+            return number;
+        }
+
+        public void setNumber(int number) {
+            this.number = number;
+        }
+
+        private String seller = "哔哩哔哩";
+
+        public String getSeller() {
+            return seller;
+        }
+
+        public void setSeller(String seller) {
+            this.seller = seller;
+        }
 
         private String title;
         private String cover;
@@ -273,7 +301,7 @@ public class RecommendBean {
             this.dislike_reasons = dislike_reasons;
         }
 
-        public static class TagBean {
+        public static class TagBean implements Serializable{
             /**
              * tag_id : 48770
              * tag_name : 独奏
@@ -299,7 +327,7 @@ public class RecommendBean {
             }
         }
 
-        public static class DislikeReasonsBean {
+        public static class DislikeReasonsBean implements  Serializable{
             /**
              * reason_id : 4
              * reason_name : UP主:怪盗V

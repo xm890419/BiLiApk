@@ -62,9 +62,17 @@ public class ComprehensiveAdapter extends RecyclerView.Adapter<ComprehensiveAdap
         @BindView(R.id.iv_compre)
         ImageView ivCompre;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener != null) {
+                        listener.onItemClick(itemView,getLayoutPosition());
+                    }
+                }
+            });
         }
 
 
@@ -81,4 +89,12 @@ public class ComprehensiveAdapter extends RecyclerView.Adapter<ComprehensiveAdap
             });
         }
     }
+    public interface OnItemClickListener{
+        public void onItemClick(View view,int position);
+    }
+    private OnItemClickListener listener;
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
+    }
+
 }

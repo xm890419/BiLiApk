@@ -64,11 +64,18 @@
         <activity
             android:name=".activity.LoginActivity"
             android:theme="@style/ColorTranslucentTheme" />
-        <activity android:name=".activity.OriginalActivity"
-            android:theme="@style/ColorTranslucentTheme"/>
-        <activity android:name=".activity.DanmkuVideoActivity"
-            android:theme="@style/ColorTranslucentTheme"
-            android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"/>
+        <activity
+            android:name=".activity.OriginalActivity"
+            android:theme="@style/ColorTranslucentTheme" />
+        <activity
+            android:name=".activity.DanmkuVideoActivity"
+            android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
+            android:theme="@style/ColorTranslucentTheme" />
+        <activity
+            android:name=".activity.GoodsInfoActivity"
+            android:theme="@style/ColorTranslucentTheme" />
+        <activity android:name=".activity.ShopingActivity"
+            android:theme="@style/ColorTranslucentTheme"></activity>
     </application>
 
 </manifest>

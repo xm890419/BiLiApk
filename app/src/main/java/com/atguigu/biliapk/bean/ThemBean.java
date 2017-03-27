@@ -1,5 +1,6 @@
 package com.atguigu.biliapk.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -306,7 +307,7 @@ public class ThemBean {
             }
         }
 
-        public static class SerializingBean {
+        public static class SerializingBean implements Serializable{
             /**
              * cover : http://i0.hdslb.com/bfs/bangumi/4d06e660b8da9cb5335552f4ebde89bbcb2e9d4f.jpg
              * favourites : 1403165

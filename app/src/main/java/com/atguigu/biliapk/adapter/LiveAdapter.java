@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.atguigu.biliapk.R;
 import com.atguigu.biliapk.activity.AuanzhuActivity;
+import com.atguigu.biliapk.activity.DanmkuVideoActivity;
 import com.atguigu.biliapk.activity.LiveWbActivity;
 import com.atguigu.biliapk.bean.LiveBean;
 import com.bumptech.glide.Glide;
@@ -232,7 +233,7 @@ public class LiveAdapter extends RecyclerView.Adapter {
             ButterKnife.bind(this, inflate);
         }
 
-        public void setData(List<LiveBean.DataBean.PartitionsBean> partitions) {
+        public void setData(final List<LiveBean.DataBean.PartitionsBean> partitions) {
             tvPaint.setText("当前" + partitions.get(0).getPartition().getCount() + "个直播");
             tvRefresh.setText(partitions.get(0).getLives().get(0).getArea_id() + "条新动态，点击刷新！");
             PaintAdapter paintAdapter = new PaintAdapter(mContext, partitions);
@@ -240,7 +241,26 @@ public class LiveAdapter extends RecyclerView.Adapter {
             gvPaint.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Toast.makeText(mContext, "position==" + position, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(mContext, "position==" + position, Toast.LENGTH_SHORT).show();
+                    LiveBean.DataBean.PartitionsBean.LivesBean livesBean = partitions.get(position).getLives().get(position);
+                    String title = livesBean.getTitle();
+                    String playurl = livesBean.getPlayurl();
+                    String name = livesBean.getOwner().getName();
+                    int online = livesBean.getOnline();
+                    //String load = String.valueOf(Glide.with(mContext).load(livesBean.getOwner().getFace()));
+                    String load = livesBean.getOwner().getFace();
+                    /*LiveBean liveBean= new LiveBean();
+                    LiveBean.DataBean.BannerBean bannerBean = liveBean.getData().getBanner().get(position);
+                    bannerBean.setTitle(title);
+                    bannerBean.setImg(link);*/
+
+                    Intent intent = new Intent(mContext, DanmkuVideoActivity.class);
+                    intent.putExtra("title",title);
+                    intent.putExtra("playurl",playurl);
+                    intent.putExtra("name",name);
+                    intent.putExtra("load", load);
+                    intent.putExtra("online",online+"");
+                    mContext.startActivity(intent);
                 }
             });
             tvRefresh.setOnClickListener(new View.OnClickListener() {
@@ -279,7 +299,7 @@ public class LiveAdapter extends RecyclerView.Adapter {
             ButterKnife.bind(this, inflate);
         }
 
-        public void setData(List<LiveBean.DataBean.PartitionsBean> partitions) {
+        public void setData(final List<LiveBean.DataBean.PartitionsBean> partitions) {
             tvPaint.setText("当前" + partitions.get(1).getPartition().getCount() + "个直播");
             tvRefresh.setText(partitions.get(1).getLives().get(1).getArea_id() + "条新动态，点击刷新！");
             LifeAdapter lifeAdapter = new LifeAdapter(mContext, partitions);
@@ -287,7 +307,26 @@ public class LiveAdapter extends RecyclerView.Adapter {
             gvPaint.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Toast.makeText(mContext, "position==" + position, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(mContext, "position==" + position, Toast.LENGTH_SHORT).show();
+                    LiveBean.DataBean.PartitionsBean.LivesBean livesBean = partitions.get(position).getLives().get(position);
+                    String title = livesBean.getTitle();
+                    String playurl = livesBean.getPlayurl();
+                    String name = livesBean.getOwner().getName();
+                    int online = livesBean.getOnline();
+                    //String load = String.valueOf(Glide.with(mContext).load(livesBean.getOwner().getFace()));
+                    String load = livesBean.getOwner().getFace();
+                    /*LiveBean liveBean= new LiveBean();
+                    LiveBean.DataBean.BannerBean bannerBean = liveBean.getData().getBanner().get(position);
+                    bannerBean.setTitle(title);
+                    bannerBean.setImg(link);*/
+
+                    Intent intent = new Intent(mContext, DanmkuVideoActivity.class);
+                    intent.putExtra("title",title);
+                    intent.putExtra("playurl",playurl);
+                    intent.putExtra("name",name);
+                    intent.putExtra("load", load);
+                    intent.putExtra("online",online+"");
+                    mContext.startActivity(intent);
                 }
             });
             tvRefresh.setOnClickListener(new View.OnClickListener() {

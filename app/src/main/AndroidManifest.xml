@@ -37,16 +37,21 @@
             android:screenOrientation="portrait"
             android:theme="@style/MainActivityColorTranslucentTheme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
-        <activity android:name=".activity.TopicCenterActivity"
-            android:theme="@style/ColorTranslucentTheme"/>
-        <activity android:name=".activity.ActivityCenterActivity"
-            android:theme="@style/ColorTranslucentTheme"/>
-        <activity android:name=".activity.LiveWbActivity"
-            android:theme="@style/ColorTranslucentTheme"/>
-        <activity android:name=".activity.AuanzhuActivity"
-            android:theme="@style/ColorTranslucentTheme"/>
-        <activity android:name=".activity.SearchActivity"
-            android:theme="@style/ColorTranslucentTheme"/>
+        <activity
+            android:name=".activity.TopicCenterActivity"
+            android:theme="@style/ColorTranslucentTheme" />
+        <activity
+            android:name=".activity.ActivityCenterActivity"
+            android:theme="@style/ColorTranslucentTheme" />
+        <activity
+            android:name=".activity.LiveWbActivity"
+            android:theme="@style/ColorTranslucentTheme" />
+        <activity
+            android:name=".activity.AuanzhuActivity"
+            android:theme="@style/ColorTranslucentTheme" />
+        <activity
+            android:name=".activity.SearchActivity"
+            android:theme="@style/ColorTranslucentTheme" />
         <activity
             android:name=".activity.GameActivity"
             android:theme="@style/ColorTranslucentTheme" />
@@ -56,8 +61,14 @@
         <activity
             android:name=".activity.VipActivity"
             android:theme="@style/ColorTranslucentTheme" />
-        <activity android:name=".activity.LoginActivity"
-            android:theme="@style/ColorTranslucentTheme"></activity>
+        <activity
+            android:name=".activity.LoginActivity"
+            android:theme="@style/ColorTranslucentTheme" />
+        <activity android:name=".activity.OriginalActivity"
+            android:theme="@style/ColorTranslucentTheme"/>
+        <activity android:name=".activity.DanmkuVideoActivity"
+            android:theme="@style/ColorTranslucentTheme"
+            android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"/>
     </application>
 
 </manifest>

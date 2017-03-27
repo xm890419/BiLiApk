@@ -19,10 +19,13 @@ import com.alibaba.fastjson.JSON;
 import com.atguigu.biliapk.R;
 import com.atguigu.biliapk.activity.ActivityCenterActivity;
 import com.atguigu.biliapk.activity.GameActivity;
+import com.atguigu.biliapk.activity.OriginalActivity;
 import com.atguigu.biliapk.activity.TopicCenterActivity;
 import com.atguigu.biliapk.base.BaseFragment;
 import com.atguigu.biliapk.bean.TagBean;
 import com.atguigu.biliapk.utlis.Constants;
+import com.wyt.searchbox.SearchFragment;
+import com.wyt.searchbox.custom.IOnSearchClickListener;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zhy.view.flowlayout.FlowLayout;
@@ -170,7 +173,20 @@ public class FoundFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.search_edit:
-                Toast.makeText(mContext, "搜索", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, "搜索", Toast.LENGTH_SHORT).show();
+                //实例化
+                SearchFragment searchFragment = SearchFragment.newInstance();
+                //第二句 , 设置回调:
+                searchFragment.setOnSearchClickListener(new IOnSearchClickListener() {
+                    @Override
+                    public void OnSearchClick(String keyword) {
+                        //这里处理逻辑
+                        Toast.makeText(mContext, keyword, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                searchFragment.show(getFragmentManager(),SearchFragment.TAG);
+
+
                 break;
             case R.id.search_img:
                 Toast.makeText(mContext, "扫一扫", Toast.LENGTH_SHORT).show();
@@ -190,7 +206,8 @@ public class FoundFragment extends BaseFragment {
                 Toast.makeText(mContext, "小黑屋", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.rl_original:
-                Toast.makeText(mContext, "原创排行榜", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, "原创排行榜", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(),OriginalActivity.class));
                 break;
             case R.id.rl_rank:
                 Toast.makeText(mContext, "全区排行榜", Toast.LENGTH_SHORT).show();

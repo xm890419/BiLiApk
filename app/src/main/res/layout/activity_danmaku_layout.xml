@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_detail_player"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/post_detail_nested_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <RelativeLayout
+                android:id="@+id/user_info_layout"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@color/card_view_background">
+
+
+                <com.atguigu.biliapk.view.CircleImageView
+                    android:id="@+id/user_pic"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="10dp"
+                    android:padding="5dp"
+                    android:src="@drawable/ico_user_default" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_toRightOf="@+id/user_pic"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/video_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_toEndOf="@+id/user_pic"
+                        android:padding="5dp"
+                        android:textColor="@color/background_dark"
+                        android:textSize="14sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:orientation="horizontal"
+                        android:paddingLeft="15dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/btn_tv_bg"
+                            android:gravity="center"
+                            android:text="UP10"
+                            android:textColor="@color/purple_trans" />
+
+                        <TextView
+                            android:id="@+id/user_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-今止-"
+                            android:textColor="@color/focus_text_color"
+                            android:textSize="12dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@+id/user_name"
+                            android:drawablePadding="5dp"
+                            android:drawableStart="@drawable/ic_watching"
+                            android:padding="5dp"
+                            android:textColor="@color/gray"
+                            android:textSize="12dp" />
+
+                        <TextView
+                            android:id="@+id/live_num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:padding="5dp"
+                            android:text="123"
+                            android:textColor="@color/gray"
+                            android:textSize="12dp" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/btn_pin_bg"
+                    android:gravity="center"
+                    android:text="+关注"
+                    android:textColor="@color/focus_text_color" />
+
+            </RelativeLayout>
+
+
+            <com.atguigu.biliapk.view.ScrollWebView
+                android:id="@+id/scroll_webView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+        </LinearLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <com.atguigu.biliapk.adapter.DanmakuVideoPlayer
+        android:id="@+id/danmaku_player"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+
+</RelativeLayout>

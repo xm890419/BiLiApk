@@ -62,12 +62,19 @@ public class SearchActivity extends BaseActivity {
         showSearchAnim();
         searchEdit.clearFocus();
         searchEdit.setText(content);
+        setEmptyLayout();
     }
     private void showSearchAnim() {
 
         ivSearchLoading.setVisibility(View.VISIBLE);
         searchLayout.setVisibility(View.GONE);
         animationDrawable.start();
+    }
+    public void setEmptyLayout() {
+
+        ivSearchLoading.setVisibility(View.VISIBLE);
+        searchLayout.setVisibility(View.GONE);
+        ivSearchLoading.setImageResource(R.drawable.search_failed);
     }
 
     @Override
@@ -89,8 +96,7 @@ public class SearchActivity extends BaseActivity {
     }
 
     public static void launch(Activity activity, String str) {
-
-        Intent mIntent = new Intent(activity, SearchActivity.class);
+        Intent mIntent = new Intent(activity, TopicCenterActivity.class);
         mIntent.putExtra(ConstantUtil.EXTRA_CONTENT, str);
         activity.startActivity(mIntent);
     }

@@ -188,9 +188,9 @@ public class GoodsInfoActivity extends AppCompatActivity {
                 break;
             case R.id.tv_more_share:
                 Toast.makeText(this, "分享", Toast.LENGTH_SHORT).show();
-                /*intent = new Intent(this,ScanActivity.class);
-                intent.putExtra(HomeAdapter.GOODS_BEAN,goodsBean.getFigure());
-                startActivity(intent);*/
+                intent = new Intent(this,ScanActivity.class);
+                intent.putExtra("dataBean",goodsBean.getCover());
+                startActivity(intent);
                 break;
             case R.id.tv_more_search:
                 Toast.makeText(this, "搜索", Toast.LENGTH_SHORT).show();

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -19,13 +20,17 @@ import com.alibaba.fastjson.JSON;
 import com.atguigu.biliapk.R;
 import com.atguigu.biliapk.activity.ActivityCenterActivity;
 import com.atguigu.biliapk.activity.GameActivity;
+import com.atguigu.biliapk.activity.GoodsInfoActivity;
 import com.atguigu.biliapk.activity.OriginalActivity;
 import com.atguigu.biliapk.activity.SearchActivity;
 import com.atguigu.biliapk.activity.ShopingActivity;
 import com.atguigu.biliapk.activity.TopicCenterActivity;
 import com.atguigu.biliapk.base.BaseFragment;
+import com.atguigu.biliapk.bean.RecommendBean;
 import com.atguigu.biliapk.bean.TagBean;
 import com.atguigu.biliapk.utlis.Constants;
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.wyt.searchbox.SearchFragment;
 import com.wyt.searchbox.custom.IOnSearchClickListener;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -48,7 +53,7 @@ import okhttp3.Call;
 
 public class FoundFragment extends BaseFragment {
 
-
+    public static final int REQUEST_CODE = 1;
     @BindView(R.id.search_edit)
     TextView searchEdit;
     @BindView(R.id.search_img)
@@ -193,7 +198,9 @@ public class FoundFragment extends BaseFragment {
 
                 break;
             case R.id.search_img:
-                Toast.makeText(mContext, "扫一扫", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, "扫一扫", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, CaptureActivity.class);
+                startActivityForResult(intent, REQUEST_CODE);
                 break;
             case R.id.rl_group:
                 Toast.makeText(mContext, "兴趣圈", Toast.LENGTH_SHORT).show();
@@ -224,6 +231,45 @@ public class FoundFragment extends BaseFragment {
                 //Toast.makeText(mContext, "周边商城", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(mContext,ShopingActivity.class));
                 break;
+        }
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        /**
+         * 处理二维码扫描结果
+         */
+        if (requestCode == REQUEST_CODE) {
+            //处理扫描结果（在界面上显示）
+            if (null != data) {
+                Bundle bundle = data.getExtras();
+                if (bundle == null) {
+                    return;
+                }
+                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+                    Toast.makeText(mContext, "解析结果:" + result, Toast.LENGTH_LONG).show();
+                    RecommendBean recommendBean = new RecommendBean();
+                    for(int i =0 ;i<recommendBean.getData().size();i++){
+                        if(result.equals(recommendBean.getData().get(i).getCover())){
+                            RecommendBean.DataBean goodsBean = recommendBean.getData().get(i);
+                            String title = goodsBean.getTitle();
+                            String desc = goodsBean.getDesc();
+                            String cover = goodsBean.getCover();
+                            Intent intent = new Intent(mContext, GoodsInfoActivity.class);
+                            intent.putExtra("title",title);
+                            intent.putExtra("desc",desc);
+                            intent.putExtra("cover",cover);
+                            intent.putExtra("dataBean", goodsBean);
+                            mContext.startActivity(intent);
+
+                        }
+                    }
+                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                    Toast.makeText(mContext, "解析二维码失败", Toast.LENGTH_LONG).show();
+                }
+            }
+
         }
     }
 

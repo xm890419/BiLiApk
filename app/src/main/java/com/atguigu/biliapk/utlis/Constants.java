@@ -31,4 +31,6 @@ public class Constants {
     public static String TOPIC_URL = "http://api.bilibili.com/topic/getlist?appkey=1d8b6e7d45233436&build=501000&mobi_app=android&page=1&pageSize=20&platform=android&ts=1490015740000&sign=be68382cdc99c168ef87f2fa423dd280";
     //原创排行榜
     public static String ORIGINAL_URL = "http://app.bilibili.com/x/v2/rank?appkey=1d8b6e7d45233436&build=501000&mobi_app=android&order=all&platform=android&pn=1&ps=20&ts=1490015891000&sign=8e7dfaa1c2fb779943430b46e734b422";
+    //搜索数据
+    public static String SEARCH_URL = "http://app.bilibili.com/x/v2/search?appkey=1d8b6e7d45233436&build=501000&duration=0&keyword=%E6%9E%81%E4%B9%90%E5%87%80%E5%9C%9F&mobi_app=android&platform=android&pn=1&ps=20";
 }

@@ -20,6 +20,7 @@ import com.atguigu.biliapk.R;
 import com.atguigu.biliapk.activity.ActivityCenterActivity;
 import com.atguigu.biliapk.activity.GameActivity;
 import com.atguigu.biliapk.activity.OriginalActivity;
+import com.atguigu.biliapk.activity.SearchActivity;
 import com.atguigu.biliapk.activity.ShopingActivity;
 import com.atguigu.biliapk.activity.TopicCenterActivity;
 import com.atguigu.biliapk.base.BaseFragment;
@@ -123,7 +124,7 @@ public class FoundFragment extends BaseFragment {
         tagsLayout.setAdapter(new TagAdapter<TagBean.DataBean.ListBean>(frontTags) {
             @Override
             public View getView(FlowLayout parent, final int position, TagBean.DataBean.ListBean listBean) {
-                TextView mTags = (TextView) LayoutInflater.from(getActivity())
+                final TextView mTags = (TextView) LayoutInflater.from(getActivity())
                         .inflate(R.layout.layout_tags_item, parent, false);
                 mTags.setText(listBean.getKeyword());
                 //获取shapeDrawable
@@ -137,7 +138,8 @@ public class FoundFragment extends BaseFragment {
                 mTags.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(mContext, "==" + position, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(mContext, "==" + position, Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(mContext, SearchActivity.class));
                     }
                 });
                 return mTags;
@@ -161,7 +163,8 @@ public class FoundFragment extends BaseFragment {
                 mTags.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(mContext, "==" + position, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(mContext, "==" + position, Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(mContext, SearchActivity.class));
                     }
                 });
                 return mTags;

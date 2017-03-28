@@ -46,4 +46,5 @@ dependencies {
     compile files('libs/jcore-android_v1.1.1.jar')
     compile files('libs/jpush-android_v3.0.3.jar')
     compile 'cn.yipianfengye.android:zxing-library:2.1'
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
 }

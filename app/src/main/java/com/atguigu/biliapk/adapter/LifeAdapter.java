@@ -54,11 +54,11 @@ public class LifeAdapter extends BaseAdapter {
         }else {
             viewHolder= (ViewHolder) convertView.getTag();
         }
-        List<LiveBean.DataBean.PartitionsBean.LivesBean> lives = datas.get(position).getLives();
-        Glide.with(mContext).load(lives.get(5).getCover().getSrc()).into(viewHolder.ivRecommend);
-        viewHolder.tvName.setText(lives.get(5).getTitle());
-        viewHolder.tvMing.setText(lives.get(5).getOwner().getName());
-        viewHolder.tvNumber.setText(lives.get(5).getOnline()+"");
+        List<LiveBean.DataBean.PartitionsBean.LivesBean> lives = datas.get(1).getLives();
+        Glide.with(mContext).load(lives.get(position).getCover().getSrc()).into(viewHolder.ivRecommend);
+        viewHolder.tvName.setText(lives.get(position).getTitle());
+        viewHolder.tvMing.setText(lives.get(position).getOwner().getName());
+        viewHolder.tvNumber.setText(lives.get(position).getOnline()+"");
         return convertView;
     }
 

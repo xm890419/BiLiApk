@@ -308,7 +308,7 @@ public class LiveAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     //Toast.makeText(mContext, "position==" + position, Toast.LENGTH_SHORT).show();
-                    LiveBean.DataBean.PartitionsBean.LivesBean livesBean = partitions.get(position).getLives().get(position);
+                    LiveBean.DataBean.PartitionsBean.LivesBean livesBean = partitions.get(1).getLives().get(position);
                     String title = livesBean.getTitle();
                     String playurl = livesBean.getPlayurl();
                     String name = livesBean.getOwner().getName();

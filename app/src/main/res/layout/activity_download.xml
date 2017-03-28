@@ -24,11 +24,54 @@
                 android:scrollbars="none" />
 
 
-            <com.atguigu.biliapk.view.CustomEmptyView
+            <!--<com.atguigu.biliapk.view.CustomEmptyView
                 android:id="@+id/empty_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center" />
+                android:layout_gravity="center" />-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_seekbar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="同时下载数量  1  "
+                        android:textSize="14sp" />
+
+                    <SeekBar
+                        android:id="@+id/seekbar"
+                        style="@style/Widget.AppCompat.SeekBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:max="4" />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:gravity="center"
+                    android:text="#注 最大下载数量 第一次下载时确定 ↑"
+                    android:textSize="16sp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
 
 
         </FrameLayout>
@@ -50,7 +93,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:progress_max="100"
-                    app:progress_text_visib="invisib"/>
+                    app:progress_text_visib="invisib" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -75,14 +118,15 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="bottom"
                 android:paddingEnd="10dp"
-                android:paddingStart="20dp">
+                android:paddingStart="20dp"
+                android:background="#FFFFFF">
 
                 <TextView
                     android:id="@+id/btn_start_all"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
                     android:layout_alignParentStart="true"
+                    android:layout_centerInParent="true"
                     android:text="全部开始"
                     android:textColor="@color/font_normal"
                     android:textSize="14sp" />

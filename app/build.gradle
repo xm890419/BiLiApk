@@ -43,4 +43,6 @@ dependencies {
     compile 'com.github.ctiao:dfm:0.7.3'
     compile 'com.google.code.gson:gson:2.2.4'
     compile files('libs/alipaySdk-20160809.jar')
+    compile files('libs/jcore-android_v1.1.1.jar')
+    compile files('libs/jpush-android_v3.0.3.jar')
 }

@@ -76,6 +76,15 @@
             android:theme="@style/ColorTranslucentTheme" />
         <activity android:name=".activity.ShopingActivity"
             android:theme="@style/ColorTranslucentTheme"></activity>
+        <!-- alipay sdk begin -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+
+        <!-- alipay sdk end -->
     </application>
 
 </manifest>

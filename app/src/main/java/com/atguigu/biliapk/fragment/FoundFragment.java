@@ -20,13 +20,11 @@ import com.alibaba.fastjson.JSON;
 import com.atguigu.biliapk.R;
 import com.atguigu.biliapk.activity.ActivityCenterActivity;
 import com.atguigu.biliapk.activity.GameActivity;
-import com.atguigu.biliapk.activity.GoodsInfoActivity;
 import com.atguigu.biliapk.activity.OriginalActivity;
 import com.atguigu.biliapk.activity.SearchActivity;
 import com.atguigu.biliapk.activity.ShopingActivity;
 import com.atguigu.biliapk.activity.TopicCenterActivity;
 import com.atguigu.biliapk.base.BaseFragment;
-import com.atguigu.biliapk.bean.RecommendBean;
 import com.atguigu.biliapk.bean.TagBean;
 import com.atguigu.biliapk.utlis.Constants;
 import com.uuzuche.lib_zxing.activity.CaptureActivity;
@@ -249,7 +247,7 @@ public class FoundFragment extends BaseFragment {
                 if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
                     String result = bundle.getString(CodeUtils.RESULT_STRING);
                     Toast.makeText(mContext, "解析结果:" + result, Toast.LENGTH_LONG).show();
-                    RecommendBean recommendBean = new RecommendBean();
+                    /*RecommendBean recommendBean = new RecommendBean();
                     for(int i =0 ;i<recommendBean.getData().size();i++){
                         if(result.equals(recommendBean.getData().get(i).getCover())){
                             RecommendBean.DataBean goodsBean = recommendBean.getData().get(i);
@@ -264,7 +262,7 @@ public class FoundFragment extends BaseFragment {
                             mContext.startActivity(intent);
 
                         }
-                    }
+                    }*/
                 } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
                     Toast.makeText(mContext, "解析二维码失败", Toast.LENGTH_LONG).show();
                 }

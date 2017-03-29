@@ -1,11 +1,13 @@
 package com.atguigu.biliapk.fragment;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.atguigu.biliapk.R;
@@ -14,6 +16,7 @@ import com.atguigu.biliapk.adapter.ComprehensiveAdapter;
 import com.atguigu.biliapk.base.BaseFragment;
 import com.atguigu.biliapk.bean.RecommendBean;
 import com.atguigu.biliapk.utlis.Constants;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -22,6 +25,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.Call;
+
+import static com.atguigu.biliapk.fragment.FoundFragment.REQUEST_CODE;
 
 /**
  * Created by 熊猛 on 2017/3/22.
@@ -35,6 +40,7 @@ public class ComprehensiveFragment extends BaseFragment {
 
     private List<RecommendBean.DataBean> datas;
     private ComprehensiveAdapter adapter;
+    private RecommendBean recommendBean;
 
     //private TextView textView;
     @Override
@@ -79,7 +85,7 @@ public class ComprehensiveFragment extends BaseFragment {
     }
 
     private void processData(String response) {
-        final RecommendBean recommendBean = JSON.parseObject(response, RecommendBean.class);
+        recommendBean = JSON.parseObject(response, RecommendBean.class);
         datas = recommendBean.getData();
         Log.e("TAG", "解析数据成功==" + recommendBean.getData().get(0).getName().toString());
         adapter = new ComprehensiveAdapter(mContext, recommendBean.getData());
@@ -103,5 +109,37 @@ public class ComprehensiveFragment extends BaseFragment {
             }
         });
 
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        /**
+         * 处理二维码扫描结果
+         */
+        if (requestCode == REQUEST_CODE) {
+            //处理扫描结果（在界面上显示）
+            if (null != data) {
+                Bundle bundle = data.getExtras();
+                if (bundle == null) {
+                    return;
+                }
+                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+                    Toast.makeText(mContext, "解析结果:" + result, Toast.LENGTH_LONG).show();
+                    for(int i =0 ;i<recommendBean.getData().size();i++){
+                        if(result.equals(recommendBean.getData().get(i).getCover())){
+                            RecommendBean.DataBean goodsBean = recommendBean.getData().get(i);
+                            Intent intent = new Intent(mContext, GoodsInfoActivity.class);
+                            intent.putExtra("dataBean", goodsBean);
+                            mContext.startActivity(intent);
+
+                        }
+                    }
+                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                    Toast.makeText(mContext, "解析二维码失败", Toast.LENGTH_LONG).show();
+                }
+            }
+
+        }
     }
 }

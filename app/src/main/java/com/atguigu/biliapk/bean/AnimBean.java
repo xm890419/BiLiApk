@@ -2,13 +2,14 @@ package com.atguigu.biliapk.bean;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by 熊猛 on 2017/3/23.
  */
 
-public class AnimBean {
+public class AnimBean  implements Serializable{
 
     /**
      * code : 0
@@ -44,7 +45,7 @@ public class AnimBean {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable{
         /**
          * param : 1
          * type : region
@@ -109,7 +110,7 @@ public class AnimBean {
             this.body = body;
         }
 
-        public static class BannerBean {
+        public static class BannerBean implements Serializable{
             private List<BottomBean> bottom;
 
             public List<BottomBean> getBottom() {
@@ -247,7 +248,7 @@ public class AnimBean {
             }
         }
 
-        public static class BodyBean {
+        public static class BodyBean implements Serializable{
             /**
              * title : 【伏地魔x林黛玉】手书——心术
              * cover : http://i0.hdslb.com/bfs/archive/0563dfa5becc2c8be4282da2e97670c9fa60a133.jpg

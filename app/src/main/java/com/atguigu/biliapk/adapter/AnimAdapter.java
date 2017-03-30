@@ -1,6 +1,7 @@
 package com.atguigu.biliapk.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.atguigu.biliapk.R;
+import com.atguigu.biliapk.activity.VideoActivity;
 import com.atguigu.biliapk.bean.AnimBean;
 import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
@@ -110,7 +112,7 @@ public class AnimAdapter extends RecyclerView.Adapter {
             banViewHolder.setData(bottom);
         } else if (getItemViewType(position) == ANIM) {
             AnimViewHolder animViewHolder = (AnimViewHolder) holder;
-            animViewHolder.setData(datas.get(position));
+            animViewHolder.setData(datas.get(0));
         }else if(getItemViewType(position) == TOPIC) {
             TopicViewHolder topicViewHolder = (TopicViewHolder) holder;
             topicViewHolder.setData(datas.get(4));
@@ -232,13 +234,24 @@ public class AnimAdapter extends RecyclerView.Adapter {
             ButterKnife.bind(this, inflate);
         }
 
-        public void setData(AnimBean.DataBean dataBean) {
+        public void setData(final AnimBean.DataBean dataBean) {
             AnimationAdapter animationAdapter = new AnimationAdapter(mContext, dataBean);
             gvPaint.setAdapter(animationAdapter);
             gvPaint.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Toast.makeText(mContext, "position==" + position, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(mContext, "position==" + position, Toast.LENGTH_SHORT).show();
+                    AnimBean.DataBean.BodyBean bodyBean = dataBean.getBody().get(position);
+                    String cover = bodyBean.getCover();
+                    int danmaku = bodyBean.getDanmaku();
+                    String title = bodyBean.getTitle();
+                    String param = bodyBean.getParam();
+                    String gotoX = bodyBean.getGotoX();
+                    String uri = bodyBean.getUri();
+                    int play = bodyBean.getPlay();
+                    Intent intent = new Intent(mContext,VideoActivity.class);
+                    intent.putExtra("bodyBean",bodyBean);
+                    mContext.startActivity(intent);
                 }
             });
             tvRefresh.setOnClickListener(new View.OnClickListener() {

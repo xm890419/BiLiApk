@@ -15,20 +15,18 @@ import android.widget.TextView;
 import com.atguigu.biliapk.R;
 import com.atguigu.biliapk.adapter.DanmakuVideoPlayer;
 import com.atguigu.biliapk.listener.SampleListener;
+import com.shuyu.gsyvideoplayer.utils.CommonUtil;
 import com.atguigu.biliapk.view.CircleImageView;
 import com.atguigu.biliapk.view.ScrollWebView;
 import com.bumptech.glide.Glide;
 import com.shuyu.gsyvideoplayer.GSYPreViewManager;
 import com.shuyu.gsyvideoplayer.GSYVideoPlayer;
 import com.shuyu.gsyvideoplayer.listener.LockClickListener;
-import com.shuyu.gsyvideoplayer.utils.CommonUtil;
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static com.atguigu.biliapk.R.id.webView;
 
 /**
  * Created by guoshuyu on 2017/2/19.

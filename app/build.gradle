@@ -47,4 +47,10 @@ dependencies {
     compile files('libs/jpush-android_v3.0.3.jar')
     compile 'cn.yipianfengye.android:zxing-library:2.1'
     compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'org.jsoup:jsoup:1.8.3'
+    compile 'io.reactivex:rxjava:1.1.0'
+    //compile 'tv.danmaku.ijk.media:ijkplayer-java:0.6.0'
+    //compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.6.0'
+    //compile 'tv.danmaku.ijk.media:ijkplayer-armv5:0.6.1'
+    //compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.6.1'
 }

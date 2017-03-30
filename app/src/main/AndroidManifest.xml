@@ -128,7 +128,7 @@
         <activity
             android:name="cn.jpush.android.ui.PopWinActivity"
             android:exported="false"
-            android:theme="@style/MyDialogStyle"></activity>
+            android:theme="@style/MyDialogStyle" />
 
         <!-- Required SDK核心功能 -->
         <activity
@@ -147,7 +147,7 @@
         <service
             android:name="cn.jpush.android.service.DownloadService"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false" />
 
         <!-- Required SDK 核心功能 -->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
@@ -224,7 +224,13 @@
             android:name="JPUSH_APPKEY"
             android:value="48b61c5efefc01e7eba9c08e" /> <!-- </>值来自开发者平台取得的AppKey -->
 
-        <activity android:name=".activity.ScanActivity"
+        <activity
+            android:name=".activity.ScanActivity"
+            android:theme="@style/ColorTranslucentTheme" />
+        <activity
+            android:name=".activity.VideoActivity"
+            android:theme="@style/ColorTranslucentTheme" />
+        <activity android:name=".video.VideoPlayerActivity"
             android:theme="@style/ColorTranslucentTheme" ></activity>
     </application>
 

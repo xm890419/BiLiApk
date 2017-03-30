@@ -42,7 +42,6 @@ dependencies {
     compile 'com.github.CarGuo:GSYVideoPlayer:v1.6.1'
     compile 'com.github.ctiao:dfm:0.7.3'
     compile 'com.google.code.gson:gson:2.2.4'
-    compile files('libs/alipaySdk-20160809.jar')
     compile files('libs/jcore-android_v1.1.1.jar')
     compile files('libs/jpush-android_v3.0.3.jar')
     compile 'cn.yipianfengye.android:zxing-library:2.1'
@@ -50,7 +49,13 @@ dependencies {
     compile 'org.jsoup:jsoup:1.8.3'
     compile 'io.reactivex:rxjava:1.1.0'
     //compile 'tv.danmaku.ijk.media:ijkplayer-java:0.6.0'
+
     //compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.6.0'
+
     //compile 'tv.danmaku.ijk.media:ijkplayer-armv5:0.6.1'
+
     //compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.6.1'
+    compile files('libs/alipaysdk.jar')
+    compile files('libs/alipaysecsdk.jar')
+    compile files('libs/alipayutdid.jar')
 }

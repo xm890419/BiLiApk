@@ -10,7 +10,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.zip.DataFormatException;
-
 import master.flame.danmaku.danmaku.loader.ILoader;
 import master.flame.danmaku.danmaku.loader.IllegalDataException;
 import master.flame.danmaku.danmaku.loader.android.DanmakuLoaderFactory;
@@ -19,7 +18,6 @@ import master.flame.danmaku.danmaku.model.android.Danmakus;
 import master.flame.danmaku.danmaku.parser.BaseDanmakuParser;
 import master.flame.danmaku.danmaku.parser.IDataSource;
 import rx.Observable;
-import rx.Subscriber;
 import rx.schedulers.Schedulers;
 
 
@@ -36,7 +34,9 @@ public class BiliDanmukuDownloadUtil {
     return Observable.create(new Observable.OnSubscribe<BaseDanmakuParser>() {
 
       @Override
-      public void call(final Subscriber<? super BaseDanmakuParser> subscriber) {
+      public void call(rx.Subscriber<? super BaseDanmakuParser> subscriber) {
+
+
 
         if (TextUtils.isEmpty(uri)) {
           subscriber.onNext(new BaseDanmakuParser() {

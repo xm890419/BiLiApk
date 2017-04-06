@@ -120,7 +120,7 @@ public class VideoActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VideoPlayerActivity.launch(VideoActivity.this, bodyBean.getTitle());
+                VideoPlayerActivity.launch(VideoActivity.this, bodyBean.getCid(), bodyBean.getTitle());
             }
         });
 
@@ -271,6 +271,14 @@ public class VideoActivity extends AppCompatActivity {
         } else if (target < 0) {
             hideFAB();
         }
+    }
+    public static void launch(Activity activity, int aid, String imgUrl) {
+
+        Intent intent = new Intent(activity, VideoActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(ConstantUtil.EXTRA_AV, aid);
+        intent.putExtra(ConstantUtil.EXTRA_IMG_URL, imgUrl);
+        activity.startActivity(intent);
     }
     private void showFAB() {
 

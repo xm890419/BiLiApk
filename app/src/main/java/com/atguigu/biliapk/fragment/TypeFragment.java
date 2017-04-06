@@ -1,32 +1,37 @@
 package com.atguigu.biliapk.fragment;
 
+import android.app.ProgressDialog;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
 import com.atguigu.biliapk.R;
 import com.atguigu.biliapk.adapter.AnimAdapter;
 import com.atguigu.biliapk.base.BaseFragment;
 import com.atguigu.biliapk.bean.AnimBean;
+import com.atguigu.biliapk.mvp.presenter.LiveBoPresenter2;
+import com.atguigu.biliapk.mvp.view.ILiveBoView2;
 import com.atguigu.biliapk.utlis.Constants;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.Call;
 
 /**
  * Created by 熊猛 on 2017/3/21.
  */
 
-public class TypeFragment extends BaseFragment {
+public class TypeFragment extends BaseFragment implements ILiveBoView2 {
     @BindView(R.id.recycle)
     RecyclerView recycle;
+    @BindView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
+    private LiveBoPresenter2 presenter;
+
+    private ProgressDialog dialog;
 
     @Override
     protected View initView() {
@@ -38,10 +43,19 @@ public class TypeFragment extends BaseFragment {
     @Override
     public void initData() {
         super.initData();
-        getDataFromNet();
+        dialog = new ProgressDialog(mContext);
+        presenter = new LiveBoPresenter2(TypeFragment.this);
+        //getDataFromNet();
+        presenter.getDataFromNet2();
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                presenter.getDataFromNet2();
+            }
+        });
     }
 
-    private void getDataFromNet() {
+    /*private void getDataFromNet() {
         OkHttpUtils.get().url(Constants.ANIM_URL).build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
@@ -54,16 +68,42 @@ public class TypeFragment extends BaseFragment {
                 processData(response);
             }
         });
-    }
+    }*/
 
-    private void processData(String response) {
-        AnimBean animBean = JSON.parseObject(response, AnimBean.class);
+    private void processData(AnimBean animBean) {
+        //AnimBean animBean = JSON.parseObject(response, AnimBean.class);
         List<AnimBean.DataBean> data = animBean.getData();
-        AnimAdapter animAdapter = new AnimAdapter(mContext,data);
+        AnimAdapter animAdapter = new AnimAdapter(mContext, data);
         recycle.setAdapter(animAdapter);
-        GridLayoutManager manager = new GridLayoutManager(mContext,1);
+        GridLayoutManager manager = new GridLayoutManager(mContext, 1);
         recycle.setLayoutManager(manager);
     }
 
 
+    @Override
+    public void hideLoading() {
+        dialog.dismiss();
+    }
+
+    @Override
+    public void showLoading() {
+        dialog.show();
+    }
+
+    @Override
+    public void onSuccess(AnimBean animBean) {
+        processData(animBean);
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onFailed(Exception ex) {
+        Toast.makeText(mContext, "联网请求失败", Toast.LENGTH_SHORT).show();
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public String getUrl() {
+        return Constants.ANIM_URL;
+    }
 }

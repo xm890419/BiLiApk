@@ -9,22 +9,20 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
 import com.atguigu.biliapk.R;
 import com.atguigu.biliapk.activity.GoodsInfoActivity;
 import com.atguigu.biliapk.adapter.ComprehensiveAdapter;
 import com.atguigu.biliapk.base.BaseFragment;
 import com.atguigu.biliapk.bean.RecommendBean;
+import com.atguigu.biliapk.mvp.presenter.LiveBoPresenter1;
+import com.atguigu.biliapk.mvp.view.ILiveBoView1;
 import com.atguigu.biliapk.utlis.Constants;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.Call;
 
 import static com.atguigu.biliapk.fragment.FoundFragment.REQUEST_CODE;
 
@@ -32,7 +30,7 @@ import static com.atguigu.biliapk.fragment.FoundFragment.REQUEST_CODE;
  * Created by 熊猛 on 2017/3/22.
  */
 
-public class ComprehensiveFragment extends BaseFragment {
+public class ComprehensiveFragment extends BaseFragment implements ILiveBoView1{
     @BindView(R.id.gv_zong)
     RecyclerView gvZong;
     @BindView(R.id.swipe_refresh_layout)
@@ -40,7 +38,12 @@ public class ComprehensiveFragment extends BaseFragment {
 
     private List<RecommendBean.DataBean> datas;
     private ComprehensiveAdapter adapter;
-    private RecommendBean recommendBean;
+    //private RecommendBean recommendBean;
+    //private RxUtils rxUtils;
+
+    private LiveBoPresenter1 presenter;
+
+   // private ProgressDialog dialog;
 
     //private TextView textView;
     @Override
@@ -58,18 +61,22 @@ public class ComprehensiveFragment extends BaseFragment {
     @Override
     public void initData() {
         super.initData();
+        //rxUtils = new RxUtils();
         //textView.setText("综合");
-        getDataFromNet();
+        //dialog = new ProgressDialog(mContext);
+        presenter = new LiveBoPresenter1(ComprehensiveFragment.this);
+        //getDataFromNet();
+        presenter.getDataFromNet1();
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getDataFromNet();
+                presenter.getDataFromNet1();
             }
         });
     }
-
-    private void getDataFromNet() {
-        OkHttpUtils.get().url(Constants.RECOMMEND_URL).build().execute(new StringCallback() {
+    //private String path = Constants.RECOMMEND_URL;
+    //private void getDataFromNet() {
+        /*OkHttpUtils.get().url(Constants.RECOMMEND_URL).build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Log.e("TAG", "" + e.getMessage());
@@ -81,11 +88,30 @@ public class ComprehensiveFragment extends BaseFragment {
                 processData(response);
                 swipeRefreshLayout.setRefreshing(false);
             }
-        });
-    }
+        });*/
+        /*rxUtils.getNet(path).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.e("TAG", "onCompleted");
+                    }
 
-    private void processData(String response) {
-        recommendBean = JSON.parseObject(response, RecommendBean.class);
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("TAG", "onFailure"+e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        Log.e("TAG", "onFailure"+s.toString());
+                        processData(s);
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                });*/
+    //}
+
+    private void processData(RecommendBean recommendBean) {
+        //recommendBean = JSON.parseObject(response, RecommendBean.class);
         datas = recommendBean.getData();
         Log.e("TAG", "解析数据成功==" + recommendBean.getData().get(0).getName().toString());
         adapter = new ComprehensiveAdapter(mContext, recommendBean.getData());
@@ -126,9 +152,9 @@ public class ComprehensiveFragment extends BaseFragment {
                 if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
                     String result = bundle.getString(CodeUtils.RESULT_STRING);
                     Toast.makeText(mContext, "解析结果:" + result, Toast.LENGTH_LONG).show();
-                    for(int i =0 ;i<recommendBean.getData().size();i++){
-                        if(result.equals(recommendBean.getData().get(i).getCover())){
-                            RecommendBean.DataBean goodsBean = recommendBean.getData().get(i);
+                    for(int i =0 ;i<datas.size();i++){
+                        if(result.equals(datas.get(i).getCover())){
+                            RecommendBean.DataBean goodsBean = datas.get(i);
                             Intent intent = new Intent(mContext, GoodsInfoActivity.class);
                             intent.putExtra("dataBean", goodsBean);
                             mContext.startActivity(intent);
@@ -141,5 +167,58 @@ public class ComprehensiveFragment extends BaseFragment {
             }
 
         }
+    }
+
+    /*@Override
+    public void hideLoading() {
+        dialog.dismiss();
+    }
+
+    @Override
+    public void showLoading() {
+        dialog.show();
+    }*/
+
+    @Override
+    public void hideRefreshing() {
+        if (swipeRefreshLayout != null) {
+            swipeRefreshLayout.setRefreshing(false);
+            // 关闭的时候也使用
+            swipeRefreshLayout.post(new Runnable() {
+                @Override
+                public void run() {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+            });
+        }
+
+    }
+
+    @Override
+    public void showRefreshing() {
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(true);
+            }
+        });
+
+    }
+
+    @Override
+    public void onSuccess(RecommendBean recommendBean) {
+        processData(recommendBean);
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onFailed(Exception ex) {
+        Toast.makeText(mContext, "联网请求失败", Toast.LENGTH_SHORT).show();
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public String getUrl() {
+        return Constants.RECOMMEND_URL;
     }
 }

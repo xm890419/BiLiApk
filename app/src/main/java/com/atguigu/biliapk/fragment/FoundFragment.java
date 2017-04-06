@@ -1,5 +1,6 @@
 package com.atguigu.biliapk.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -16,7 +17,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
 import com.atguigu.biliapk.R;
 import com.atguigu.biliapk.activity.ActivityCenterActivity;
 import com.atguigu.biliapk.activity.GameActivity;
@@ -26,13 +26,13 @@ import com.atguigu.biliapk.activity.ShopingActivity;
 import com.atguigu.biliapk.activity.TopicCenterActivity;
 import com.atguigu.biliapk.base.BaseFragment;
 import com.atguigu.biliapk.bean.TagBean;
+import com.atguigu.biliapk.mvp.presenter.LiveBoPresenter3;
+import com.atguigu.biliapk.mvp.view.ILiveBoView3;
 import com.atguigu.biliapk.utlis.Constants;
 import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.wyt.searchbox.SearchFragment;
 import com.wyt.searchbox.custom.IOnSearchClickListener;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
@@ -43,13 +43,12 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.Call;
 
 /**
  * Created by 熊猛 on 2017/3/21.
  */
 
-public class FoundFragment extends BaseFragment {
+public class FoundFragment extends BaseFragment implements ILiveBoView3 {
 
     public static final int REQUEST_CODE = 1;
     @BindView(R.id.search_edit)
@@ -86,7 +85,10 @@ public class FoundFragment extends BaseFragment {
     RelativeLayout rlShop;
 
     private boolean isShowMore = true;
-    private TagBean tagBean;
+    //private TagBean tagBean;
+    private LiveBoPresenter3 presenter;
+
+    private ProgressDialog dialog;
 
     //private List<TagBean.DataBean.ListBean> dataBeen = new ArrayList<>();
     @Override
@@ -100,10 +102,13 @@ public class FoundFragment extends BaseFragment {
     @Override
     public void initData() {
         super.initData();
-        getDataFromNet();
+        dialog = new ProgressDialog(mContext);
+        presenter = new LiveBoPresenter3(FoundFragment.this);
+        //getDataFromNet();
+        presenter.getDataFromNet3();
     }
 
-    private void getDataFromNet() {
+    /*private void getDataFromNet() {
         OkHttpUtils.get().url(Constants.TAG_URL).build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
@@ -116,10 +121,10 @@ public class FoundFragment extends BaseFragment {
                 processData(response);
             }
         });
-    }
+    }*/
 
-    private void processData(String response) {
-        tagBean = JSON.parseObject(response, TagBean.class);
+    private void processData(TagBean tagBean) {
+        //tagBean = JSON.parseObject(response, TagBean.class);
         Log.e("TAG", "" + tagBean.getData().getList().size());
         List<TagBean.DataBean.ListBean> list = tagBean.getData().getList();
         //获取热搜标签集合前9个默认显示
@@ -290,5 +295,30 @@ public class FoundFragment extends BaseFragment {
             downDrawable.setBounds(0, 0, downDrawable.getMinimumWidth(), downDrawable.getMinimumHeight());
             tvMore.setCompoundDrawables(downDrawable, null, null, null);
         }
+    }
+
+    @Override
+    public void hideLoading() {
+        dialog.dismiss();
+    }
+
+    @Override
+    public void showLoading() {
+        dialog.show();
+    }
+
+    @Override
+    public void onSuccess(TagBean tagBean) {
+        processData(tagBean);
+    }
+
+    @Override
+    public void onFailed(Exception ex) {
+        Toast.makeText(mContext, "联网请求失败", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public String getUrl() {
+        return Constants.TAG_URL;
     }
 }

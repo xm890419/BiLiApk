@@ -259,7 +259,7 @@ public class AnimBean  implements Serializable{
              * danmaku : 179
              * is_ad : false
              */
-
+            private int cid;
             private String title;
             private String cover;
             private String uri;
@@ -269,6 +269,16 @@ public class AnimBean  implements Serializable{
             private int play;
             private int danmaku;
             private boolean is_ad;
+            public int getCid() {
+
+                return cid;
+            }
+
+
+            public void setCid(int cid) {
+
+                this.cid = cid;
+            }
 
             public String getTitle() {
                 return title;

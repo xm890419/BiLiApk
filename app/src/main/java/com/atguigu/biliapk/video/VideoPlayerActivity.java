@@ -348,7 +348,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements DanmukuSwi
     }
 
 
-    public static void launch(Activity activity, String title) {
+    public static void launch(Activity activity, int cid, String title) {
 
         Intent mIntent = new Intent(activity, VideoPlayerActivity.class);
         //mIntent.putExtra(ConstantUtil.EXTRA_CID, cid);
